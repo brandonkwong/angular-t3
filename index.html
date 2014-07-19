@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="t3App">
+<html lang="en" ng-app="T3App">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="js/app.js"></script>
   </head>
-  <body ng-controller="t3Controller">
+  <body ng-controller="T3Controller">
 
     <div class="container center">
 
@@ -20,25 +20,32 @@
 
       <!-- Board -->
       <div class="board" ng-repeat="rows in board">
-
-        <div ng-class="{ tile: true, times: tile.iconTimes, circle: tile.iconCircle, heart: tile.iconHeart }" ng-repeat="tile in rows" ng-click="tileIcon(tile)">
-          
+        <div ng-class="{tile: true, times: tile.iconTimes, circle: tile.iconCircle, heart: tile.iconHeart}" ng-repeat="tile in rows" ng-click="tileIcon(tile)">
           <div class="icon">
-            {{ tile.key }}
+            {{tile.key}}
               <br>
             <i class="fa fa-{{ tile.icon }}"></i>
               <br>
-            {{ tile.icon }}
+            {{tile.icon}}
           </div>
-        
         </div>
-
       </div> <!-- end board -->
 
+        <br>
+        <br>
 
-
+      <!-- Test X Board -->
+      <div class="board" ng-repeat="rows in playerX">
+        <div ng-class="{tile: true}" ng-repeat="tile in rows">
+          <div class="icon">
+            <i class="fa fa-{{tile.icon}}"></i>
+              <br>
+            {{tile.icon}}
+          </div>
+        </div>
+      </div> <!-- end board -->
 
     </div> <!-- end container -->
 
-  </body> <!-- end controller -->
+  </body>
 </html>

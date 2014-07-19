@@ -34,7 +34,8 @@ h2 {
 
 /* =TTT
 -------------------------------------------------- */
-.board { background: gray;
+.board {
+  background: gray; /* Temp */
   margin: 0 auto;
 }
 
@@ -49,7 +50,6 @@ h2 {
 }
 
 .icon {
-  background: pink;
   font-family: 'FontAwesome', sans-serif;
   height: auto;
   left: 50%;
@@ -63,18 +63,11 @@ h2 {
   width: 50%;
 }
 
-/* =Keys
+/* =Icons
 -------------------------------------------------- */
-.times {
-  background: maroon;
-}
-
-.circle {
-  background: yellow;
-}
-
-.heart {
-  background: yellow;
+.times, .circle, .heart {
+  background: crimson;
+  color: #efefef;
 }
 
 .fa-times {

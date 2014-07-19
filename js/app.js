@@ -1,9 +1,11 @@
-var t3App = angular.module('t3App', []);
+var t3App = angular.module('T3App', []);
 
-t3App.controller('t3Controller', function($scope) {
+t3App.controller('T3Controller', function($scope) {
 
-  // Player
+  // Players
   $scope.playerActive = 1;
+  $scope.playerOne = 0;
+  $scope.playerTwo = 0;
 
   // Difficulty Level
   $scope.levelEasy = 3;
@@ -12,53 +14,52 @@ t3App.controller('t3Controller', function($scope) {
   
   // Board Init
   $scope.boardInit = function(grid) {
+    // Board Array
     $scope.board = [];
-    
-    for (var x = 0; x < grid; x++) {
+
+    // X Board Test
+    $scope.playerX = [];
+
+    for (var r = 0; r < grid; r++) {
+      // Row Arrays
       var row = [];
+
+      // X Rows Test
+      var rowX = [];
       
-      for (var y = 0; y < grid; y++) {
+      for (var c = 0; c < grid; c++) {
+        // Tile Objects
         row.push(
           {
-            key: '['+x+']'+'['+y+']',
+            key: '['+r+']'+'['+c+']',
             active: false,
             iconTimes: false,
             iconCircle: false,
             // iconHeart: false,
-            icon: null
+            icon: null,
+            score: 0
           }
         );
+
+        // X Tiles Test
+        rowX.push(
+          {
+            icon: 'times'
+          }
+        );
+
       }
 
       $scope.board.push(row);
+
+      // X Rows Push Test
+      $scope.playerX.push(rowX);
+
     }
   }
-
   // To be implemented via ng-model or option
-  $scope.boardInit($scope.levelHard);
+  $scope.boardInit($scope.levelEasy);
 
-
-
-
-  for (var i = 0; i < $scope.board.length; i++) {
-
-    $scope.board[2][i].icon = 'HEY';
-
-    if ($scope.board[2][i].icon == 'times') {
-      alert('times wins');
-    }
-
-  }
-
-
-
-
-
-
-
-  
-  // WIN CONDITIONS
-  // put into arrays [ rows ], [ cols ], [ diags ]
 
   // Function for Tiles
   $scope.tileIcon = function(tile) {
@@ -67,11 +68,36 @@ t3App.controller('t3Controller', function($scope) {
       tile.active = true;
 
       switch ($scope.playerActive) {
+        // Player 1 Actions on Click
         case 1:
           tile.icon = 'times';
           tile.iconTimes = true;
           $scope.playerActive = 2;
+
+          // Player X Win Testing
+          // $scope.playerOne.push(0);
+
+          // if ($scope.board[0][0].score == $scope.board.length) {
+          //   alert('yes');
+          // }
+          // else {
+          //   alert('nope');
+          // }
+
+          // console.log($scope.board[0][0].icon);
+          // console.log($scope.playerX[0][0].icon);
+
+          // for (var i = 0; i < $scope.board.length; i++)
+          //   if ($scope.board[0][i].item == $scope.playerX[0][i].item) {
+          //     alert('success');
+          //   }
+          //   else {
+          //     alert('fail');
+          //   }
+          // }
+
           break;
+        // Player 2 Actions on Click
         case 2:
           tile.icon = 'circle';
           tile.iconCircle = true;
@@ -87,8 +113,7 @@ t3App.controller('t3Controller', function($scope) {
     else {
       alert('Don\'t do it, Bro');
     }
+
   };
-
-
 
 });
