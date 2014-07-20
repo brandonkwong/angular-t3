@@ -20,27 +20,14 @@
 
       <!-- Board -->
       <div class="board" ng-repeat="rows in board">
-        <div ng-class="{tile: true, times: tile.iconTimes, circle: tile.iconCircle, heart: tile.iconHeart}" ng-repeat="tile in rows" ng-click="tileIcon(tile)">
-          <div class="icon">
+        <div ng-class="{tile: true, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in rows" ng-click="keyClick(tile)">
+          <div class="key">
             {{tile.key}}
               <br>
-            <i class="fa fa-{{ tile.icon }}"></i>
+            <i class="fa fa-times" ng-if="tile.playerOne | filter: true"></i>
+            <i class="fa fa-circle" ng-if="tile.playerTwo | filter: true"></i>
               <br>
-            {{tile.icon}}
-          </div>
-        </div>
-      </div> <!-- end board -->
-
-        <br>
-        <br>
-
-      <!-- Test X Board -->
-      <div class="board" ng-repeat="rows in playerX">
-        <div ng-class="{tile: true}" ng-repeat="tile in rows">
-          <div class="icon">
-            <i class="fa fa-{{tile.icon}}"></i>
-              <br>
-            {{tile.icon}}
+            {{tile.score}}
           </div>
         </div>
       </div> <!-- end board -->

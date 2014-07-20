@@ -6,16 +6,9 @@
   box-sizing: border-box;
 }
 
-body {
-}
-
 h1 {
   font-size: 3em;
   margin-bottom: .25em;
-}
-
-h2 {
-  margin: 0;
 }
 
 
@@ -49,8 +42,8 @@ h2 {
   width: 6.25em;
 }
 
-.icon {
-  font-family: 'FontAwesome', sans-serif;
+.key {
+  font-family: 'FontAwesome';
   height: auto;
   left: 50%;
   margin: 0;
@@ -63,11 +56,14 @@ h2 {
   width: 50%;
 }
 
-/* =Icons
+/* =Keys
 -------------------------------------------------- */
-.times, .circle, .heart {
+.x {
   background: crimson;
-  color: #efefef;
+}
+
+.o {
+  background: pink;
 }
 
 .fa-times {
@@ -75,9 +71,9 @@ h2 {
 }
 
 .fa-circle {
-  font-size: 2.5em;
+  font-size: 2.6em;
 }
 
-.fa-heart {
+/*.fa-heart {
   font-size: 2.25em;
-}
+}*/
