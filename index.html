@@ -3,34 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Angular T3</title>
-    <meta name="description" content="Tic Tac Toe Angular">
+    <title>TEST | Angular T3</title>
+    <meta name="description" content="TicTacToe Angular">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/normalize.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="js/angular.min.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body ng-controller="T3Controller">
 
     <div class="container center">
 
-      <h1>Angular T3</h1>
+      <h1>Angular T3 / Test</h1>
 
       <!-- Board -->
-      <div class="board" ng-repeat="rows in board">
-        <div ng-class="{tile: true, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in rows" ng-click="keyClick(tile)">
-          <div class="key">
+      <div class="board">
+        <div ng-class="{tile: true, wallLeft: tile.wallLeft, wallRight: tile.wallRight, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="keyClick(tile)">
             {{tile.key}}
-              <br>
-            <i class="fa fa-times" ng-if="tile.playerOne | filter: true"></i>
-            <i class="fa fa-circle" ng-if="tile.playerTwo | filter: true"></i>
-              <br>
-            {{tile.score}}
-          </div>
+            <i ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
         </div>
       </div> <!-- end board -->
+
+      <div class="clear"></div>
 
     </div> <!-- end container -->
 

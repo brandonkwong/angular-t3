@@ -15,6 +15,7 @@ h1 {
 /* =Container
 -------------------------------------------------- */
 .container {
+  background: #ddd; /* Temp */
   margin: 0 auto;
   max-width: 48em;
   width: 90%;
@@ -24,29 +25,54 @@ h1 {
   text-align: center;
 }
 
-
-/* =TTT
--------------------------------------------------- */
-.board {
-  background: gray; /* Temp */
-  margin: 0 auto;
+.clear {
+  clear: both;
 }
 
-.tile { background: #fff;
-  border: .125em solid #222;
-  cursor: pointer;
+
+/* =Board
+-------------------------------------------------- */
+.board {
+  background: pink; /* Temp */
   display: inline-block;
+  margin-bottom: 2em;
+}
+
+.tile {
+  background: #fff;
+  border-radius: .25em;
+  box-shadow: 0 .25em #222;
+  cursor: pointer;
+  float: left;
   height: 6.25em;
-  margin: .25em;
+  margin: .25em .25em .5em;
   position: relative;
   width: 6.25em;
 }
 
-.key {
-  font-family: 'FontAwesome';
+/*
+   Note: wallLeft and wallRight for Testing
+   Remove: .wallLeft and .wallRight (testing only)
+   Add: .wall with clear:both; and ng-click="{wall: wallLeft}"
+*/
+
+/* Left Wall */
+.wallLeft {
+  background: yellow;
+  clear: both;
+}
+
+/* Right Wall */
+.wallRight {
+  background: yellow;
+}
+
+
+/* =Key
+-------------------------------------------------- */
+.fa {
   height: auto;
   left: 50%;
-  margin: 0;
   position: absolute;
   top: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
@@ -56,14 +82,12 @@ h1 {
   width: 50%;
 }
 
-/* =Keys
--------------------------------------------------- */
 .x {
   background: crimson;
 }
 
 .o {
-  background: pink;
+  background: cornsilk;
 }
 
 .fa-times {
