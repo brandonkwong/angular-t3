@@ -8,14 +8,13 @@
 
 h1 {
   font-size: 3em;
-  margin-bottom: .25em;
 }
 
 
 /* =Container
 -------------------------------------------------- */
 .container {
-  background: #ddd; /* Temp */
+  background: #ddd; /* Testing */
   margin: 0 auto;
   max-width: 48em;
   width: 90%;
@@ -33,9 +32,9 @@ h1 {
 /* =Board
 -------------------------------------------------- */
 .board {
-  background: pink; /* Temp */
+  background: pink; /* Testing */
   display: inline-block;
-  margin-bottom: 2em;
+  margin: 2em 0;
 }
 
 .tile {
@@ -48,23 +47,6 @@ h1 {
   margin: .25em .25em .5em;
   position: relative;
   width: 6.25em;
-}
-
-/*
-   Note: wallLeft and wallRight for Testing
-   Remove: .wallLeft and .wallRight (testing only)
-   Add: .wall with clear:both; and ng-click="{wall: wallLeft}"
-*/
-
-/* Left Wall */
-.wallLeft {
-  background: yellow;
-  clear: both;
-}
-
-/* Right Wall */
-.wallRight {
-  background: yellow;
 }
 
 

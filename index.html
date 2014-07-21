@@ -9,26 +9,38 @@
     <link href="css/normalize.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body ng-controller="T3Controller">
 
-    <div class="container center">
+    <section class="container center">
 
       <h1>Angular T3 / Test</h1>
 
-      <!-- Board -->
-      <div class="board">
-        <div ng-class="{tile: true, wallLeft: tile.wallLeft, wallRight: tile.wallRight, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="tileClick(tile)">
-            {{tile.index}}
-            <i ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
-        </div>
-      </div> <!-- end board -->
+      <button class="button" ng-click="boardInit(lvlNorm)">Normal</button>
+      <button class="button" ng-click="boardInit(lvlHard)">Hard</button>
+      <button class="button" ng-click="boardInit(lvlUlti)">Ultimate</button>
 
       <div class="clear"></div>
 
-    </div> <!-- end container -->
+      <!-- Board -->
+      <div class="board">
+        <!-- Tiles -->
+        <div ng-class="{tile: true, clear: tile.clear, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="tileClick(tile)">
+          <!-- Icons -->
+          {{tile.index}}
+          <i ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
+        </div>
+      </div>
+
+      <section>
+        <br>
+        <p>Lorem ipsum</p>
+        <br>
+      </section>
+
+    </section>
 
   </body>
 </html>
