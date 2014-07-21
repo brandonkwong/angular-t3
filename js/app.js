@@ -95,26 +95,18 @@ t3App.controller('T3Controller', function($scope) {
       }
     }
 
-    // Push Clicks into Win Array for Diagonals
+    // Push Clicks into Win Array for Left Diagonal
     for (var i = 0; i < $scope.level; i++) {
-
-      // Note: Testing for Diagonal Win Conditions
-      if (index == i) {
+      if (index == i * ($scope.level + 1)) {
         $scope.diaWin[0].push(0);
       }
-      // else if (index == i + ($scope.level + 1)) {
-      //   $scope.diaWin[0].push(0);
-      // }
-      // else if (index == i + ($scope.level + 3)) {
-      //   $scope.diaWin[0].push(0);
-      // }
-      // else if (index == i + ($scope.level + 6)) {
-      //   $scope.diaWin[0].push(0);
-      // }
-      // else if (index == i * i) {
-      //   $scope.diaWin[0].push(0);
-      // }
+    }
 
+    // Push Clicks into Win Array for Right Diagonal
+    for (var i = 0; i < $scope.level; i++) {
+      if (index == (i + 1) * ($scope.level - 1)) {
+        $scope.diaWin[1].push(0);
+      }
     }
 
     // Win Conditions for Rows and Cols
