@@ -2,14 +2,16 @@ var t3App = angular.module('T3App', []);
 
 t3App.controller('T3Controller', function($scope) {
 
-  // Players
+  // Player Active
   $scope.playerActive = 1;
+
 
   // Difficulty Level
   $scope.lvlNorm = 3;
   $scope.lvlHard = 4;
   $scope.lvlUlti = 5;
   
+
   // Board Init
   $scope.boardInit = function(lvl) {
 
@@ -24,7 +26,7 @@ t3App.controller('T3Controller', function($scope) {
       // Left Wall Tile
       if (i % lvl == 0) {
         $scope.board.push({
-          key: '['+i+']',
+          index: '['+i+']', // index for testing
           active: false,
           wall: true,
           wallLeft: true,
@@ -36,7 +38,7 @@ t3App.controller('T3Controller', function($scope) {
       // Right Wall Tile
       else if (i % lvl == lvl - 1) {
         $scope.board.push({
-          key: '['+i+']',
+          index: '['+i+']',
           active: false,
           wall: true,
           wallLeft: false,
@@ -48,7 +50,7 @@ t3App.controller('T3Controller', function($scope) {
       // Default Tile
       else {
         $scope.board.push({
-          key: '['+i+']',
+          index: '['+i+']',
           active: false,
           wall: false,
           wallLeft: false,
@@ -59,29 +61,41 @@ t3App.controller('T3Controller', function($scope) {
       }
     }
 
-  }($scope.lvlUlti);
+  }($scope.lvlNorm);
 
 
   // Win Init
   $scope.winInit = function(lvl) {
 
-    // Note: Include All in boardInit();
-    $scope.rowWin = [];
-    $scope.colWin = [];
-    $scope.diaWin = [[],[]];
+    // Player One
+    $scope.pOneRow = [];
+    $scope.pOneCol = [];
+    $scope.pOneDia = [[],[]];
+
+    // Player Two
+    $scope.pTwoRow = [];
+    $scope.pTwoCol = [];
+    $scope.pTwoDia = [[],[]];
 
     for (var i = 0; i < lvl; i++) {
       var row = [];
-      $scope.rowWin.push(row);
+      $scope.pOneRow.push(row);
       var col = [];
-      $scope.colWin.push(col);
+      $scope.pOneCol.push(col);
+    }
+
+    for (var j = 0; j < lvl; j++) {
+      var row = [];
+      $scope.pTwoRow.push(row);
+      var col = [];
+      $scope.pTwoCol.push(col);
     }
 
   }($scope.level);
 
 
   // Tile Scan for Wins
-  $scope.tileScan = function(tile) {
+  $scope.tileScan = function(tile, pRow, pCol, pDia) {
 
     var index = $scope.board.indexOf(tile);
 
@@ -89,8 +103,8 @@ t3App.controller('T3Controller', function($scope) {
     for (var i = 0; i < $scope.level; i++) {
       for (var j = 0; j < $scope.level; j++) {
         if (index == j + ($scope.level * i)) {
-          $scope.rowWin[i].push(0);
-          $scope.colWin[j].push(0);
+          pRow[i].push(0);
+          pCol[j].push(0);
         }
       }
     }
@@ -98,42 +112,41 @@ t3App.controller('T3Controller', function($scope) {
     // Push Clicks into Win Array for Left Diagonal
     for (var i = 0; i < $scope.level; i++) {
       if (index == i * ($scope.level + 1)) {
-        $scope.diaWin[0].push(0);
+        pDia[0].push(0);
       }
     }
 
     // Push Clicks into Win Array for Right Diagonal
     for (var i = 0; i < $scope.level; i++) {
       if (index == (i + 1) * ($scope.level - 1)) {
-        $scope.diaWin[1].push(0);
+        pDia[1].push(0);
       }
     }
 
     // Win Conditions for Rows and Cols
     for (var k = 0; k < $scope.level; k++) {
       // Row Win
-      if ($scope.rowWin[k].length == $scope.level) {
+      if (pRow[k].length == $scope.level) {
         alert('success');
       }
       // Col Win
-      else if ($scope.colWin[k].length == $scope.level) {
+      else if (pCol[k].length == $scope.level) {
         alert('success');
       }
     }
 
     // Win Conditions for Diagonals
     for (var l = 0; l < 2; l++) {
-      if ($scope.diaWin[l].length == $scope.level) {
+      if (pDia[l].length == $scope.level) {
         alert('success');
       }
-      console.log($scope.diaWin[l]);
     }
 
   };
 
 
   // Tile Click Function
-  $scope.keyClick = function(tile) {
+  $scope.tileClick = function(tile) {
 
     if (tile.active == false) {
       tile.active = true;
@@ -143,15 +156,13 @@ t3App.controller('T3Controller', function($scope) {
         case 1:
           tile.playerOne = true;
           $scope.playerActive = 2;
-
-          // Note: Testing Win for Player One only
-          $scope.tileScan(tile);
-
+          $scope.tileScan(tile, $scope.pOneRow, $scope.pOneCol, $scope.pOneDia);
           break;
         // Player 2 Actions on Click
         case 2:
           tile.playerTwo = true;
           $scope.playerActive = 1;
+          $scope.tileScan(tile, $scope.pTwoRow, $scope.pTwoCol, $scope.pTwoDia);
           break;
         // case 3:
         //   tile.playerThree = true;

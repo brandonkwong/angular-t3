@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TEST | Angular T3</title>
+    <title>Angular T3</title>
     <meta name="description" content="TicTacToe Angular">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/normalize.css" rel="stylesheet">
@@ -20,8 +20,8 @@
 
       <!-- Board -->
       <div class="board">
-        <div ng-class="{tile: true, wallLeft: tile.wallLeft, wallRight: tile.wallRight, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="keyClick(tile)">
-            {{tile.key}}
+        <div ng-class="{tile: true, wallLeft: tile.wallLeft, wallRight: tile.wallRight, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="tileClick(tile)">
+            {{tile.index}}
             <i ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
         </div>
       </div> <!-- end board -->
