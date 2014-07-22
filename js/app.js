@@ -12,7 +12,7 @@ t3App.controller('T3Controller', function($scope) {
   $scope.lvlUlti = 5;
 
 
-  // Board Init
+  // Board Init Function
   $scope.boardInit = function(lvl) {
 
     // Board Array
@@ -74,10 +74,11 @@ t3App.controller('T3Controller', function($scope) {
 
   };
 
+  // Board Init Default
   $scope.boardInit($scope.lvlNorm);
 
 
-  // Tile Scan for Win Conditions
+  // Tile Scan Function for Win Conditions
   $scope.tileScan = function(tile, row, col, dia, player) {
 
     // Get Index of Clicked Tile
@@ -125,7 +126,7 @@ t3App.controller('T3Controller', function($scope) {
     }
 
     // Tie
-    if ($scope.boardActive.length == ($scope.level * $scope.level) - 1) {
+    if ($scope.boardActive.length == ($scope.level * $scope.level)) {
       alert('TIE');
     }
 

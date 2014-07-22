@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="T3App">
+<html lang="en" x-ng-app="T3App">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,25 +12,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="js/app.js"></script>
   </head>
-  <body ng-controller="T3Controller">
+  <body x-ng-controller="T3Controller">
 
     <section class="container center">
 
       <h1>Angular T3 / Test</h1>
 
-      <button class="button" ng-click="boardInit(lvlNorm)">Normal</button>
-      <button class="button" ng-click="boardInit(lvlHard)">Hard</button>
-      <button class="button" ng-click="boardInit(lvlUlti)">Ultimate</button>
+      <button class="button" x-ng-click="boardInit(lvlNorm)">Normal</button>
+      <button class="button" x-ng-click="boardInit(lvlHard)">Hard</button>
+      <button class="button" x-ng-click="boardInit(lvlUlti)">Ultimate</button>
 
       <div class="clear"></div>
 
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div ng-class="{tile: true, clear: tile.clear, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="tileClick(tile)">
+        <div x-ng-class="{tile: true, clear: tile.clear, x: tile.playerOne, o: tile.playerTwo}" x-ng-repeat="tile in board" x-ng-click="tileClick(tile)">
           <!-- Icons -->
           {{tile.index}}
-          <i ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
+          <i x-ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
         </div>
       </div>
 
