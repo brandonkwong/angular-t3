@@ -8,13 +8,19 @@
 
 h1 {
   font-size: 3em;
+  margin-bottom: 0;
 }
 
+h2 {
+  font-family: 'FontAwesome', sans-serif;
+  font-size: 1.5em;
+  margin: .5em 0;
+}
 
 /* =Container
 -------------------------------------------------- */
 .container {
-  background: #ddd; /* Testing */
+  background: pink; /* Testing */
   margin: 0 auto;
   max-width: 48em;
   width: 90%;
@@ -32,21 +38,44 @@ h1 {
 /* =Board
 -------------------------------------------------- */
 .board {
-  background: pink; /* Testing */
   display: inline-block;
-  margin: 2em 0;
+  margin-bottom: 2em;
 }
 
 .tile {
-  background: #fff;
+  background: #eee;
   border-radius: .25em;
-  box-shadow: 0 .25em #222;
+  box-shadow: 0 .4em rgba(0, 0, 0, .9);
   cursor: pointer;
   float: left;
   height: 6.25em;
-  margin: .25em .25em .5em;
+  margin: .25em .25em .6em;
   position: relative;
   width: 6.25em;
+}
+
+.tile:active {
+  top: .1em;
+  box-shadow: 0 .3em rgba(0, 0, 0, .9);
+}
+
+.button {
+  background: #eee;
+  border: 0;
+  border-radius: .25em;
+  box-shadow: 0 .25em rgba(0, 0, 0, .9);
+  margin: 0 .5em;
+  padding: .25em 1em;
+  position: relative;
+}
+
+.button:active {
+  top: .05em;
+  box-shadow: 0 .2em rgba(0, 0, 0, .9);
+}
+
+.button:focus {
+  outline: none;
 }
 
 

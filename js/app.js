@@ -1,19 +1,19 @@
 var t3App = angular.module('T3App', []);
 
-t3App.controller('T3Controller', function($scope) {
-
-  // Player Active
-  $scope.playerActive = 1;
-
+t3App.controller('T3Controller', function($scope, $timeout) {
 
   // Difficulty Level
   $scope.lvlNorm = 3;
-  $scope.lvlHard = 4;
-  $scope.lvlUlti = 5;
+  $scope.lvlMed = 4;
+  $scope.lvlAdv = 5;
 
 
   // Board Init Function
   $scope.boardInit = function(lvl) {
+
+    // Players
+    $scope.playerActive = 1;
+    $scope.playerWin;
 
     // Board Array
     $scope.board = [];
@@ -22,6 +22,8 @@ t3App.controller('T3Controller', function($scope) {
     var grid = lvl * lvl;
 
     // Tile Objects
+    $scope.tileDisabled = false;
+
     for (var i = 0; i < grid; i++) {
       // Clear Tile
       if (i % lvl == 0) {
@@ -47,6 +49,9 @@ t3App.controller('T3Controller', function($scope) {
 
     // Board Active
     $scope.boardActive = [];
+    $scope.rowWin = false;
+    $scope.colWin = false;
+    $scope.diaWin = false;
 
     // Player One Arrays
     $scope.pOneRow = [];
@@ -111,23 +116,36 @@ t3App.controller('T3Controller', function($scope) {
     // Row and Column Wins
     for (var k = 0; k < $scope.level; k++) {
       if (row[k].length == $scope.level) {
-        alert(player + ' WINS');
+        $scope.rowWin = true;
+        $scope.tileDisabled = true;
+        $scope.playerActive = 0;
+        $scope.playerWin = player;
       }
       else if (col[k].length == $scope.level) {
-        alert(player + ' WINS');
+        $scope.colWin = true;
+        $scope.tileDisabled = true;
+        $scope.playerActive = 0;
+        $scope.playerWin = player;
       }
     }
 
     // Diagonal Wins
     for (var l = 0; l < 2; l++) {
       if (dia[l].length == $scope.level) {
-        alert(player + ' WINS');
+        $scope.diaWin = true;
+        $scope.tileDisabled = true;
+        $scope.playerActive = 0;
+        $scope.playerWin = player;
       }
     }
 
     // Tie
     if ($scope.boardActive.length == ($scope.level * $scope.level)) {
-      alert('TIE');
+      if ((!$scope.rowWin && !$scope.colWin) && (!$scope.diaWin)) {
+        $scope.tileDisabled = true;
+        $scope.playerActive = 0;
+        $scope.playerWin = 'TIE';
+      }
     }
 
   };
