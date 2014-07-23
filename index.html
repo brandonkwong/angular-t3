@@ -9,26 +9,29 @@
     <link href="css/normalize.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
     <script src="js/app.js"></script>
   </head>
   <body ng-controller="T3Controller">
 
-    <section class="container center">
+    <section class="container">
 
       <h1>Angular T3</h1>
 
       <!-- Status -->
       <section class="status">
-        <i ng-if="gameInit" ng-class="{fa:true, 'fa-times':playerActive == 1, 'fa-circle':playerActive == 2}"></i>
+        <i ng-if="gameInit" ng-class="{fa: true, 'fa-times': playerActive == 1, 'fa-circle': playerActive == 2}"></i>
         <h2 ng-bind="boardStatus"></h2>
       </section>
 
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div ng-class="{tile:true, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
-          <i ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
+        <div ng-class="{tile: true, 'tile-hd': level == 4, 'tile-exp': level == 5, clear: tile.wallL, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
+          <!-- Player -->
+          <i ng-class="{fa:true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
         </div>
       </div>
 
