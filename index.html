@@ -27,9 +27,7 @@
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div ng-class="{tile:true, clear:tile.clear, x:tile.playerOne, o:tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
-          <!-- Icons -->
-          <!-- {{tile.index}} -->
+        <div ng-class="{tile:true, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
           <i ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
         </div>
       </div>

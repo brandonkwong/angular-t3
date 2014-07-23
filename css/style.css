@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+body {
+  font-size: 1em;
+}
+
 h1 {
   font-size: 3em;
   margin-bottom: 0;
@@ -24,7 +28,7 @@ h2 span {
 /* =Container
 -------------------------------------------------- */
 .container {
-  background: white; /* Testing */
+  background: #fff; /* Color for Testing */
   margin: 0 auto;
   max-width: 48em;
   width: 90%;
@@ -49,10 +53,11 @@ h2 span {
 
 .status .fa, .status h2 {
   display: inline-block;
+  padding: 0;
 }
 
 .status .fa {
-  position: absolute;
+  position: absolute; /* Note: Positioning off in Firefox / Safari */
 }
 
 .status .fa-times {
@@ -132,14 +137,10 @@ h2 span {
   border-radius: .25em;
   box-shadow: 0 .25em rgba(0, 0, 0, .8);
   font-family: 'FontAwesome', sans-serif;
+  height: 2em;
   margin: 0 .25em;
-  padding: .25em 1em;
+  padding: .25em 1em .15em;
   position: relative;
-}
-
-.button.restart {
-  padding: .305em 1em;
-  top: -.04em;
 }
 
 .button:active {
@@ -150,3 +151,11 @@ h2 span {
 .button:focus {
   outline: none;
 }
+
+
+/* =Media Queries
+-------------------------------------------------- */
+
+/*
+  Note: Add media queries for responsive app;
+*/
