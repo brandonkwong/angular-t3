@@ -1,8 +1,8 @@
 /* =Body
 -------------------------------------------------- */
 *, *:before, *:after {
-  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -12,7 +12,6 @@ h1 {
 }
 
 h2 {
-  font-family: 'FontAwesome', sans-serif;
   font-size: 1.5em;
   margin: .5em 0;
 }
@@ -77,7 +76,7 @@ h2 span {
 }
 
 .tile {
-  background: #ddd;
+  background: #d3d3d3;
   border-radius: .25em;
   box-shadow: 0 .4em rgba(0, 0, 0, .8);
   cursor: pointer;
@@ -99,9 +98,12 @@ h2 span {
   position: absolute;
   top: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -o-transition: all .2s;
+  transition: all .2s;
   width: 50%;
 }
 
@@ -114,18 +116,18 @@ h2 span {
 }
 
 .x {
-  background: crimson;
+  background: #dc143c;
 }
 
 .o {
-  background: cornsilk;
+  background: #40e0d0;
 }
 
 
 /* =Buttons
 -------------------------------------------------- */
 .button {
-  background: #ddd;
+  background: #d3d3d3;
   border: 0;
   border-radius: .25em;
   box-shadow: 0 .25em rgba(0, 0, 0, .8);
