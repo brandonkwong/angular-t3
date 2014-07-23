@@ -1,29 +1,29 @@
 var t3App = angular.module('T3App', []);
 
-t3App.controller('T3Controller', function($scope, $timeout) {
+t3App.controller('T3Controller', ['$scope', function($scope) {
 
   // Difficulty Level
   $scope.lvlNorm = 3;
-  $scope.lvlMed = 4;
-  $scope.lvlAdv = 5;
+  $scope.lvlHard = 4;
+  $scope.lvlExp = 5;
+  
 
+  // Board New Function
+  $scope.boardNew = function(lvl) {
 
-  // Board Init Function
-  $scope.boardInit = function(lvl) {
-
-    // Players
+    // Game Setup
+    $scope.gameInit = true;
+    $scope.boardActive = true;
+    $scope.boardStatus = 'Player Move';
     $scope.playerActive = 1;
-    $scope.playerWin;
+    $scope.level = lvl;
 
     // Board Array
     $scope.board = [];
-    $scope.level = lvl;
 
     var grid = lvl * lvl;
 
     // Tile Objects
-    $scope.tileDisabled = false;
-
     for (var i = 0; i < grid; i++) {
       // Clear Tile
       if (i % lvl == 0) {
@@ -47,11 +47,8 @@ t3App.controller('T3Controller', function($scope, $timeout) {
       }
     }
 
-    // Board Active
-    $scope.boardActive = [];
-    $scope.rowWin = false;
-    $scope.colWin = false;
-    $scope.diaWin = false;
+    // Board Win Array
+    $scope.boardWin = [];
 
     // Player One Arrays
     $scope.pOneRow = [];
@@ -79,12 +76,19 @@ t3App.controller('T3Controller', function($scope, $timeout) {
 
   };
 
-  // Board Init Default
-  $scope.boardInit($scope.lvlNorm);
+
+  // Board Init
+  $scope.boardInit = function() {
+    $scope.boardNew($scope.lvlNorm);
+    $scope.gameInit = false;
+    $scope.boardActive = false;
+    $scope.boardStatus = 'Select Difficulty to Start';
+    $scope.playerActive = 0;
+  }();
 
 
   // Tile Scan Function for Win Conditions
-  $scope.tileScan = function(tile, row, col, dia, player) {
+  $scope.tileScan = function(tile, row, col, dia) {
 
     // Get Index of Clicked Tile
     var index = $scope.board.indexOf(tile);
@@ -116,35 +120,29 @@ t3App.controller('T3Controller', function($scope, $timeout) {
     // Row and Column Wins
     for (var k = 0; k < $scope.level; k++) {
       if (row[k].length == $scope.level) {
-        $scope.rowWin = true;
-        $scope.tileDisabled = true;
-        $scope.playerActive = 0;
-        $scope.playerWin = player;
+        $scope.boardStatus = 'Player Wins';
+        $scope.boardActive = false;
       }
       else if (col[k].length == $scope.level) {
-        $scope.colWin = true;
-        $scope.tileDisabled = true;
-        $scope.playerActive = 0;
-        $scope.playerWin = player;
+        $scope.boardStatus = 'Player Wins';
+        $scope.boardActive = false;
       }
     }
 
     // Diagonal Wins
     for (var l = 0; l < 2; l++) {
       if (dia[l].length == $scope.level) {
-        $scope.diaWin = true;
-        $scope.tileDisabled = true;
-        $scope.playerActive = 0;
-        $scope.playerWin = player;
+        $scope.boardStatus = 'Player Wins';
+        $scope.boardActive = false;
       }
     }
 
     // Tie
-    if ($scope.boardActive.length == ($scope.level * $scope.level)) {
-      if ((!$scope.rowWin && !$scope.colWin) && (!$scope.diaWin)) {
-        $scope.tileDisabled = true;
-        $scope.playerActive = 0;
-        $scope.playerWin = 'TIE';
+    if ($scope.boardWin.length == ($scope.level * $scope.level)) {
+      if ($scope.boardActive) {
+        $scope.boardStatus = 'Both Players Tie';
+        $scope.boardActive = false;
+        $scope.gameInit = false;
       }
     }
 
@@ -155,34 +153,34 @@ t3App.controller('T3Controller', function($scope, $timeout) {
   $scope.tileClick = function(tile) {
 
     if (tile.active == false) {
-      $scope.boardActive.push(0);
+      $scope.boardWin.push(0);
       tile.active = true;
       switch ($scope.playerActive) {
         // Player 1 Actions on Click
         case 1:
           tile.playerOne = true;
-          $scope.tileScan(tile, $scope.pOneRow, $scope.pOneCol, $scope.pOneDia, 'PLAYER 1');
-          $scope.playerActive = 2;
+          $scope.tileScan(tile, $scope.pOneRow, $scope.pOneCol, $scope.pOneDia);
+          if ($scope.boardActive) {
+            $scope.boardStatus = 'Player Move';
+            $scope.playerActive = 2;
+          }
           break;
         // Player 2 Actions on Click
         case 2:
           tile.playerTwo = true;
-          $scope.tileScan(tile, $scope.pTwoRow, $scope.pTwoCol, $scope.pTwoDia, 'PLAYER 2');
-          $scope.playerActive = 1; // Change to 3 for Player 3
+          $scope.tileScan(tile, $scope.pTwoRow, $scope.pTwoCol, $scope.pTwoDia);
+          if ($scope.boardActive) {
+            $scope.playerActive = 1;
+            $scope.boardStatus = 'Player Move';
+          }
           break;
-        // Player 3 Actions on Click
-        // case 3:
-        //   tile.playerThree = true;
-        //   $scope.tileScan(tile, $scope.pThreeRow, $scope.pThreeCol, $scope.pThreeDia, 'PLAYER 3');
-        //   $scope.playerActive = 1;
-        //   break;
       }
     }
     else {
-      alert('Don\'t do it, Bro');
+      $scope.boardActive = true;
     }
 
   };
 
 
-});
+}]);

@@ -18,35 +18,34 @@
 
       <h1>Angular T3</h1>
 
-      <h2 ng-show="playerActive == 1 && !tileDisabled">Player &#xf00d; Move</h2>
-      <h2 ng-show="playerActive == 2 && !tileDisabled">Player &#xf111; Move</h2>
-      <h2 ng-show="playerWin == 'PLAYER 1' && tileDisabled">Player &#xf00d; Wins</h2>
-      <h2 ng-show="playerWin == 'PLAYER 2' && tileDisabled">Player &#xf111; Wins</h2>
-      <h2 ng-show="playerWin == 'TIE' && tileDisabled">Both Players Tie</h2>
-
-      <!-- &#xf111; -->
+      <section class="status">
+        <i ng-if="gameInit" ng-class="{fa:true, 'fa-times':playerActive == 1, 'fa-circle':playerActive == 2}"></i>
+        <h2 ng-bind="boardStatus"></h2>
+      </section>
 
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div ng-class="{tile: true, clear: tile.clear, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="tileDisabled || tileClick(tile)">
+        <div ng-class="{tile:true, clear:tile.clear, x:tile.playerOne, o:tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
           <!-- Icons -->
           <!-- {{tile.index}} -->
-          <i ng-class="{fa: true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
+          <i ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
         </div>
       </div>
 
       <div class="clear"></div>
 
-      <button class="button" ng-click="boardInit(lvlMed)">Med</button>
-      <button class="button" ng-click="boardInit(lvlNorm)">Start</button>
-      <button class="button" ng-click="boardInit(lvlAdv)">Adv</button>
+      <button class="button" ng-click="boardNew(lvlNorm)">Normal</button>
+      <button class="button" ng-click="boardNew(lvlHard)">Hard</button>
+      <button class="button" ng-click="boardNew(lvlExp)">Exp</button>
+      <button class="button restart" ng-click="boardNew(level)">&#xf021;</button>
 
-      <section>
         <br>
-        <p>Lorem ipsum</p>
         <br>
-      </section>
+
+      <p>Lorem ipsum</p>
+
+        <br>
 
     </section>
 

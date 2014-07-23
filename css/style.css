@@ -17,10 +17,15 @@ h2 {
   margin: .5em 0;
 }
 
+h2 span {
+  cursor: pointer;
+}
+
+
 /* =Container
 -------------------------------------------------- */
 .container {
-  background: pink; /* Testing */
+  background: white; /* Testing */
   margin: 0 auto;
   max-width: 48em;
   width: 90%;
@@ -35,17 +40,46 @@ h2 {
 }
 
 
+/* =Status
+-------------------------------------------------- */
+.status {
+  margin: 0 auto;
+  position: relative; 
+  width: 18em;
+}
+
+.status .fa, .status h2 {
+  display: inline-block;
+}
+
+.status .fa {
+  position: absolute;
+}
+
+.status .fa-times {
+  font-size: 1.75em;
+  top: .4em;
+  left: 1.75em;
+}
+
+.status .fa-circle {
+  font-size: 1.55em;
+  top: .55em;
+  left: 1.95em;
+}
+
+
 /* =Board
 -------------------------------------------------- */
 .board {
   display: inline-block;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .tile {
-  background: #eee;
+  background: #ddd;
   border-radius: .25em;
-  box-shadow: 0 .4em rgba(0, 0, 0, .9);
+  box-shadow: 0 .4em rgba(0, 0, 0, .8);
   cursor: pointer;
   float: left;
   height: 6.25em;
@@ -56,32 +90,10 @@ h2 {
 
 .tile:active {
   top: .1em;
-  box-shadow: 0 .3em rgba(0, 0, 0, .9);
+  box-shadow: 0 .3em rgba(0, 0, 0, .8);
 }
 
-.button {
-  background: #eee;
-  border: 0;
-  border-radius: .25em;
-  box-shadow: 0 .25em rgba(0, 0, 0, .9);
-  margin: 0 .5em;
-  padding: .25em 1em;
-  position: relative;
-}
-
-.button:active {
-  top: .05em;
-  box-shadow: 0 .2em rgba(0, 0, 0, .9);
-}
-
-.button:focus {
-  outline: none;
-}
-
-
-/* =Key
--------------------------------------------------- */
-.fa {
+.tile .fa {
   height: auto;
   left: 50%;
   position: absolute;
@@ -93,6 +105,14 @@ h2 {
   width: 50%;
 }
 
+.tile .fa-times {
+  font-size: 3em;
+}
+
+.tile .fa-circle {
+  font-size: 2.6em;
+}
+
 .x {
   background: crimson;
 }
@@ -101,14 +121,30 @@ h2 {
   background: cornsilk;
 }
 
-.fa-times {
-  font-size: 3em;
+
+/* =Buttons
+-------------------------------------------------- */
+.button {
+  background: #ddd;
+  border: 0;
+  border-radius: .25em;
+  box-shadow: 0 .25em rgba(0, 0, 0, .8);
+  font-family: 'FontAwesome', sans-serif;
+  margin: 0 .25em;
+  padding: .25em 1em;
+  position: relative;
 }
 
-.fa-circle {
-  font-size: 2.6em;
+.button.restart {
+  padding: .305em 1em;
+  top: -.04em;
 }
 
-/*.fa-heart {
-  font-size: 2.25em;
-}*/
+.button:active {
+  top: .05em;
+  box-shadow: 0 .2em rgba(0, 0, 0, .8);
+}
+
+.button:focus {
+  outline: none;
+}
