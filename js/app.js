@@ -2,6 +2,9 @@ var t3App = angular.module('T3App', ['firebase']);
 
 t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $firebase) {
 
+  // Firebase Connection
+  var t3Fire = new Firebase('https://angular-t3-test.firebaseio.com');
+  
   // Difficulty Level
   $scope.lvlNorm = 3;
   $scope.lvlHard = 4;
@@ -248,7 +251,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
         // Player 2 Actions on Click
         case 2:
           tile.playerTwo = true;
-          // $scope.tileScan(tile, 'playerTwo');
+          $scope.tileScan(tile, 'playerTwo');
           if ($scope.boardActive) {
             $scope.playerActive = 1;
             $scope.boardStatus = 'Player Move';

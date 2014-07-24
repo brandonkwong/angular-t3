@@ -22,16 +22,16 @@
 
       <!-- Status -->
       <section class="status">
-        <i ng-if="gameInit" ng-class="{fa: true, 'fa-times': playerActive == 1, 'fa-circle': playerActive == 2}"></i>
+        <i ng-if="gameInit" ng-class="{fa:true, 'fa-times':playerActive == 1, 'fa-circle':playerActive == 2}"></i>
         <h2 ng-bind="boardStatus"></h2>
       </section>
 
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div ng-class="{tile: true, 'tile-hd': level == 4, 'tile-exp': level == 5, clear: tile.wallL, x: tile.playerOne, o: tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
+        <div ng-class="{tile:true, 'tile-hd':level == 4, 'tile-exp':level == 5, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" ng-repeat="tile in board" ng-click="!boardActive || tileClick(tile)">
           <!-- Player -->
-          <i ng-class="{fa:true, 'fa-times': tile.playerOne, 'fa-circle': tile.playerTwo}"></i>
+          <i ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
         </div>
       </div>
 

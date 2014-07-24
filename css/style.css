@@ -7,6 +7,7 @@
 }
 
 body {
+  background: #fffaf0;
   font-size: 1em;
 }
 
@@ -28,7 +29,7 @@ h2 span {
 /* =Container
 -------------------------------------------------- */
 .container {
-  background: #fff; /* Color for Testing */
+  background: #fffaf0; /* Color for Testing */
   margin: 0 auto;
   max-width: 48em;
   text-align: center;
@@ -78,7 +79,7 @@ h2 span {
 }
 
 .tile {
-  background: #d3d3d3;
+  background: #dcdcdc;
   border-radius: .25em;
   box-shadow: 0 .4em rgba(0, 0, 0, .8);
   cursor: pointer;
@@ -133,7 +134,7 @@ h2 span {
 /* =Buttons
 -------------------------------------------------- */
 .button {
-  background: #d3d3d3;
+  background: #dcdcdc;
   border: 0;
   border-radius: .25em;
   box-shadow: 0 .25em rgba(0, 0, 0, .8);
