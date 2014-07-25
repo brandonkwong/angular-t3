@@ -29,7 +29,7 @@ h2 span {
 /* =Container
 -------------------------------------------------- */
 .container {
-  background: #fffef3; /* Color for Testing */
+  background: #fffef3;
   margin: 0 auto;
   max-width: 48em;
   text-align: center;
@@ -99,8 +99,8 @@ h2 span {
 }
 
 .tile:active {
-  box-shadow: 0 .3em rgba(0, 0, 0, .65);
-  top: .1em;
+  box-shadow: 0 .25em rgba(0, 0, 0, .65);
+  top: .15em;
 }
 
 .tile .fa {
