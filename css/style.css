@@ -150,6 +150,10 @@ h2 span {
   position: relative;
 }
 
+.button.repeat {
+  padding: .25em 1em .1em;
+}
+
 .button:active {
   top: .15em;
   box-shadow: 0 .25em rgba(0, 0, 0, .75);

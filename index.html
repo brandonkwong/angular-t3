@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="T3App">
+<html lang="en" data-ng-app="T3App">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +14,7 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
     <script src="js/app.js"></script>
   </head>
-  <body ng-controller="T3Controller" ng-model="board">
+  <body data-ng-controller="T3Controller" data-ng-model="board">
 
     <section class="container">
 
@@ -22,25 +22,27 @@
 
       <!-- Status -->
       <section class="status">
-        <i ng-if="gameInit" ng-class="{fa:true, 'fa-times':playerActive == 1, 'fa-circle':playerActive == 2}"></i>
-        <h2 ng-bind="boardStatus"></h2>
+        <i data-ng-if="gameInit" data-ng-class="{fa:true, 'fa-times':playerActive == 1, 'fa-circle':playerActive == 2}"></i>
+        <h2 data-ng-bind="boardStatus"></h2>
       </section>
 
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div ng-class="{tile:true, 'tile-hd':level == 4, 'tile-exp':level == 5, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" ng-repeat="tile in board | orderByPriority" ng-click="!boardActive || tileClick(tile)">
+        <div data-ng-class="{tile:true, 'tile-hd':level == 4, 'tile-exp':level == 5, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" data-ng-repeat="tile in board | orderByPriority" data-ng-click="!boardActive || tileClick(tile)">
           <!-- Player -->
-          <i ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
+          <i data-ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
         </div>
       </div>
 
       <div class="clear"></div>
 
-      <button class="button" ng-click="boardNew(lvlNorm)">Normal</button>
-      <button class="button" ng-click="boardNew(lvlHard)">Hard</button>
-      <button class="button" ng-click="boardNew(lvlExp)">Exp</button>
-      <button class="button restart" ng-click="boardNew(level)">&#xf021;</button>
+      <button class="button" data-ng-click="boardNew(lvlNorm)">Normal</button>
+      <button class="button" data-ng-click="boardNew(lvlHard)">Hard</button>
+      <button class="button" data-ng-click="boardNew(lvlExp)">Exp</button>
+      <button class="button repeat" data-ng-click="boardNew(level)">&#xf01e;</button>
+
+      <button class="button" data-ng-click="playerSet()">JOIN</button>
 
         <br>
         <br>

@@ -2,37 +2,32 @@ var t3App = angular.module('T3App', ['firebase']);
 
 t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $firebase) {
 
-  // Firebase Reference URL
-  var ref = 'https://test-ttt-08.firebaseio.com/';
-
-  // Firebase Remote References
-  $scope.remoteBoard = $firebase(new Firebase(ref + 'board'));
-  $scope.remoteBoardActive = $firebase(new Firebase(ref + 'boardActive'));
-  $scope.remoteBoardScore = $firebase(new Firebase(ref + 'boardScore'));
-  $scope.remoteGameInit = $firebase(new Firebase(ref + 'gameInit'));
-  $scope.remoteLevel = $firebase(new Firebase(ref + 'level'));
-  $scope.remotePlayer = $firebase(new Firebase(ref + 'player'));
-  $scope.remoteStatus = $firebase(new Firebase(ref + 'status'));
-  $scope.remoteWinScore = $firebase(new Firebase(ref + 'winScore'));
-
-  // Note: change urls to snake_case
- 
-  // Firebase Bindings
-  $scope.remoteBoard.$bind($scope, 'board');
-  $scope.remoteBoardActive.$bind($scope, 'boardActive');
-  $scope.remoteBoardScore.$bind($scope, 'boardScore');
-  $scope.remoteGameInit.$bind($scope, 'gameInit');
-  $scope.remoteLevel.$bind($scope, 'level');
-  $scope.remotePlayer.$bind($scope, 'playerActive');
-  $scope.remoteStatus.$bind($scope, 'boardStatus');
-  $scope.remoteWinScore.$bind($scope, 'winScore');
-
-
   // Difficulty Level
   $scope.lvlNorm = 3;
   $scope.lvlHard = 4;
   $scope.lvlExp = 5;
+
   
+  // REQUIRES MORE TESTING
+
+  // Players
+  $scope.playerInit = false;
+
+  // Player Set Function
+  $scope.playerSet = function() {
+
+    if (!$scope.playerInit) {
+      $scope.playerId = 1;
+      $scope.playerInit = true;
+    }
+    else {
+      $scope.playerId = 2;
+    }
+
+    console.log($scope.playerId);
+
+  };
+
 
   // Board New Function
   $scope.boardNew = function(lvl) {
@@ -257,26 +252,42 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   $scope.tileClick = function(tile, player) {
 
     if (!tile.active) {
-      $scope.boardScore.tileCount++;
-      tile.active = true;
       switch ($scope.playerActive) {
         // Player 1 Actions on Click
         case 1:
-          tile.playerOne = true;
-          $scope.tileScan(tile, 'playerOne');
-          if ($scope.boardActive) {
-            $scope.playerActive = 2;
-            $scope.boardStatus = 'Player Move';
+
+          if ($scope.playerId === 1) {  // Requires more testing
+            $scope.boardScore.tileCount++;
+            tile.active = true;
+            tile.playerOne = true;
+            $scope.tileScan(tile, 'playerOne');
+            if ($scope.boardActive) {
+              $scope.playerActive = 2;
+              $scope.boardStatus = 'Player Move';
+            }
           }
+          else {
+            alert('it is not your turn');
+          }
+
           break;
         // Player 2 Actions on Click
         case 2:
-          tile.playerTwo = true;
-          $scope.tileScan(tile, 'playerTwo');
-          if ($scope.boardActive) {
-            $scope.playerActive = 1;
-            $scope.boardStatus = 'Player Move';
+
+          if ($scope.playerId === 2) {  // Requires more testing
+            $scope.boardScore.tileCount++;
+            tile.active = true;
+            tile.playerTwo = true;
+            $scope.tileScan(tile, 'playerTwo');
+            if ($scope.boardActive) {
+              $scope.playerActive = 1;
+              $scope.boardStatus = 'Player Move';
+            }
           }
+          else {
+            alert('it is not your turn');
+          }
+
           break;
       }
     }
@@ -285,6 +296,49 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
     }
 
   };
+
+
+  // Firebase URL References
+  var url = 'https://test-ttt-08.firebaseio.com/';
+  var t3Ref = new Firebase(url);
+  var boardRef = new Firebase(url + 'board');
+  var playerRef = new Firebase(url + 'player');
+
+  var playerInitRef = new Firebase(url + 'player-init');
+
+  var playerOneRef = new Firebase(url + 'player-one');
+  var playerTwoRef = new Firebase(url + 'player-two');
+  var statusRef = new Firebase(url + 'status');
+
+  // Firebase Remote References
+  $scope.remoteBoard = $firebase(new Firebase(url + 'board'));
+  $scope.remoteBoardActive = $firebase(new Firebase(url + 'boardActive'));
+  $scope.remoteBoardScore = $firebase(new Firebase(url + 'boardScore'));
+  $scope.remoteGameInit = $firebase(new Firebase(url + 'gameInit'));
+  $scope.remoteLevel = $firebase(new Firebase(url + 'level'));
+  $scope.remotePlayer = $firebase(new Firebase(url + 'player'));
+  $scope.remotePlayerInit = $firebase(new Firebase(url + 'player-init'));
+  $scope.remoteStatus = $firebase(new Firebase(url + 'status'));
+  $scope.remoteWinScore = $firebase(new Firebase(url + 'winScore'));
+
+  // Note: change urls to snake_case
+ 
+  // Firebase Bindings
+  $scope.remoteBoard.$bind($scope, 'board');
+  $scope.remoteBoardActive.$bind($scope, 'boardActive');
+  $scope.remoteBoardScore.$bind($scope, 'boardScore');
+  $scope.remoteGameInit.$bind($scope, 'gameInit');
+  $scope.remoteLevel.$bind($scope, 'level');
+  $scope.remotePlayer.$bind($scope, 'playerActive');
+  $scope.remotePlayerInit.$bind($scope, 'playerInit');
+  $scope.remoteStatus.$bind($scope, 'boardStatus');
+  $scope.remoteWinScore.$bind($scope, 'winScore');
+
+  // On Disconnect
+  boardRef.onDisconnect().remove();
+  playerRef.onDisconnect().set(0);
+  statusRef.onDisconnect().set('Select Difficulty to Start');
+  playerInitRef.onDisconnect().set(false);
 
 
 }]);
