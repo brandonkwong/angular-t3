@@ -22,14 +22,14 @@
 
       <!-- Status -->
       <section class="status">
-        <i data-ng-if="gameInit" data-ng-class="{fa:true, 'fa-times':playerActive == 1, 'fa-circle':playerActive == 2}"></i>
+        <i data-ng-if="gameInit" data-ng-class="{fa:true, 'fa-times':playerActive === 1, 'fa-circle':playerActive === 2}"></i>
         <h2 data-ng-bind="boardStatus"></h2>
       </section>
 
       <!-- Board -->
       <div class="board">
         <!-- Tiles -->
-        <div data-ng-class="{tile:true, 'tile-hd':level == 4, 'tile-exp':level == 5, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" data-ng-repeat="tile in board | orderByPriority" data-ng-click="!boardActive || tileClick(tile)">
+        <div data-ng-class="{tile:true, 'tile-hd':level === 4, 'tile-exp':level === 5, clear:tile.wallL, x:tile.playerOne, o:tile.playerTwo}" data-ng-repeat="tile in board | orderByPriority" data-ng-click="!boardActive || tileClick(tile)">
           <!-- Player -->
           <i data-ng-class="{fa:true, 'fa-times':tile.playerOne, 'fa-circle':tile.playerTwo}"></i>
         </div>
@@ -37,22 +37,23 @@
 
       <div class="clear"></div>
 
-      <button class="button" data-ng-click="boardNew(lvlNorm)">Normal</button>
-      <button class="button" data-ng-click="boardNew(lvlHard)">Hard</button>
-      <button class="button" data-ng-click="boardNew(lvlExp)">Exp</button>
-      <button class="button repeat" data-ng-click="boardNew(level)">&#xf01e;</button>
+      <button class="button" data-ng-click="boardSetup(lvlNorm)">Normal</button>
+      <button class="button" data-ng-click="boardSetup(lvlHard)">Hard</button>
+      <button class="button" data-ng-click="boardSetup(lvlExp)">Exp</button>
+      <button class="button repeat" data-ng-click="boardSetup(level)">&#xf01e;</button>
 
-        <br>
-        <br>
-
-      <button class="button" data-ng-click="playerId || playerSet()">Join</button>
-
-        <br>
-        <br>
-
-      <p>Lorem ipsum</p>
-
-        <br>
+      <!-- Player Tile Select -->
+      <div data-ng-if="!playerId" class="md-window">
+        <div class="md-content">
+          <h2>Choose a Tile</h2>
+          <div data-ng-class="{tile:true, x:playerInit !== 1}" data-ng-click="playerInit === 1 || playerId || playerSet(1)">
+            <i data-ng-class="{fa:true, 'fa-times':true}"></i>
+          </div>
+          <div data-ng-class="{tile:true, o:playerInit !== 2}" data-ng-click="playerInit === 2 || playerId || playerSet(2)">
+            <i data-ng-class="{fa:true, 'fa-circle':true}"></i>
+          </div>
+        </div>
+      </div>
 
     </section>
 

@@ -3,22 +3,22 @@ var t3App = angular.module('T3App', ['firebase']);
 t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $firebase) {
 
   // Players
-  $scope.playerInit = false;
-  $scope.playerId = false;
+  $scope.playerId;
+  $scope.playerInit = 0;
+
 
   // Player Set Function
-  $scope.playerSet = function() {
-
-    if (!$scope.playerInit) {
-      $scope.playerId = 1;
-      $scope.playerInit = true;
+  $scope.playerSet = function(player) {
+    switch (player) {
+      case 1:
+        $scope.playerId = 1;
+        $scope.playerInit = 1;
+        break;
+      case 2:
+        $scope.playerId = 2;
+        $scope.playerInit = 2;
+        break;
     }
-    else {
-      $scope.playerId = 2;
-    }
-
-    console.log($scope.playerId);
-
   };
 
 
@@ -28,8 +28,8 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   $scope.lvlExp = 5;
 
 
-  // Board New Function
-  $scope.boardNew = function(lvl) {
+  // Board Setup Function
+  $scope.boardSetup = function(lvl) {
 
     // Game Setup
     $scope.gameInit = true;
@@ -96,7 +96,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
   // Board Init
   $scope.boardInit = function() {
-    $scope.boardNew($scope.lvlNorm);
+    $scope.boardSetup($scope.lvlNorm);
     $scope.gameInit = false;
     $scope.boardActive = false;
     $scope.boardStatus = 'Select Difficulty to Start';
@@ -306,8 +306,6 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   $scope.remotePlayerInit = $firebase(new Firebase(url + 'player-init'));
   $scope.remoteStatus = $firebase(new Firebase(url + 'status'));
   $scope.remoteWinScore = $firebase(new Firebase(url + 'winScore'));
-
-  // Note: change urls to snake_case
  
   // Firebase Bindings
   $scope.remoteBoard.$bind($scope, 'board');
@@ -323,9 +321,11 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   // On Disconnect
   boardRef.onDisconnect().remove();
   playerRef.onDisconnect().set(0);
-  playerInitRef.onDisconnect().set(false);
+  playerInitRef.onDisconnect().set(0);
   levelRef.onDisconnect().set(3);
   statusRef.onDisconnect().set('Select Difficulty to Start');
+
+  // Notes: Reset Player Tile on Disconnect and Update URL Refs
 
 
 }]);
