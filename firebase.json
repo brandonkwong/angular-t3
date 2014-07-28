@@ -1,0 +1,9 @@
+{
+  "firebase": "angular-t3",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

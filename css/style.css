@@ -173,7 +173,7 @@ h2 span {
   max-width: 24em;
   min-width: 17em;
   position: fixed;
-  top: 48%;
+  top: 30%;
   -webkit-transform: translateX(-50%) translateY(-50%);
   -moz-transform: translateX(-50%) translateY(-50%);
   -ms-transform: translateX(-50%) translateY(-50%);
@@ -185,8 +185,9 @@ h2 span {
 .md-content {
   background: rgba(0, 0, 0, .25);
   border-radius: .25em;
+  box-shadow: 0 .5em rgba(0, 0, 0, .75);
   margin: 0 auto;
-  padding: .25em 0 1.5em;
+  padding: 1.5em;
   position: relative;
 }
 
@@ -194,6 +195,16 @@ h2 span {
   display: inline-block;
   float: none;
   margin: 0 .5em;
+}
+
+.md-overlay {
+  background: #fffef3;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 

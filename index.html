@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Angular T3</title>
-    <meta name="description" content="TicTacToe Angular">
+    <meta name="description" content="Tic Tac Toe built using HTML5, CSS3, AngularJS, and Firebase.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/normalize.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,10 +42,11 @@
       <button class="button" data-ng-click="boardSetup(lvlExp)">Exp</button>
       <button class="button repeat" data-ng-click="boardSetup(level)">&#xf01e;</button>
 
-      <!-- Player Tile Select -->
-      <div data-ng-if="!playerId" class="md-window">
+      <!-- Player Tile Select Window -->
+      <div data-ng-show="!playerId" class="md-window">
+        <h1>Angular T3</h1>
+        <h2>Select Your Tile Marker</h2>
         <div class="md-content">
-          <h2>Choose a Tile</h2>
           <div data-ng-class="{tile:true, x:playerInit !== 1}" data-ng-click="playerInit === 1 || playerId || playerSet(1)">
             <i data-ng-class="{fa:true, 'fa-times':true}"></i>
           </div>
@@ -54,6 +55,7 @@
           </div>
         </div>
       </div>
+      <div data-ng-show="!playerId" class="md-overlay"></div>
 
     </section>
 

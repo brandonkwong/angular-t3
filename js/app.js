@@ -40,14 +40,14 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
     // Board Score
     $scope.boardScore = {tileCount: 0};
-    $scope.winScore;
+    $scope.levelScore;
 
     // Win Score Set by Level
     if (lvl > 3) {
-      $scope.winScore = 3;
+      $scope.levelScore = 3;
     }
     else {
-      $scope.winScore = lvl - 1;
+      $scope.levelScore = lvl - 1;
     }
 
     // Board Array
@@ -221,19 +221,19 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
     }
 
     // Win Conditions
-    if ($scope.playerRow.length >= $scope.winScore) {
+    if ($scope.playerRow.length >= $scope.levelScore) {
       $scope.boardStatus = 'Player Wins';
       $scope.boardActive = false;
     }
-    else if ($scope.playerCol.length >= $scope.winScore) {
+    else if ($scope.playerCol.length >= $scope.levelScore) {
       $scope.boardStatus = 'Player Wins';
       $scope.boardActive = false;
     }
-    else if ($scope.playerDiL.length >= $scope.winScore) {
+    else if ($scope.playerDiL.length >= $scope.levelScore) {
       $scope.boardStatus = 'Player Wins';
       $scope.boardActive = false;
     }
-    else if ($scope.playerDiR.length >= $scope.winScore) {
+    else if ($scope.playerDiR.length >= $scope.levelScore) {
       $scope.boardStatus = 'Player Wins';
       $scope.boardActive = false;
     }
@@ -288,24 +288,24 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
 
   // Firebase URL References
-  var url = 'https://test-ttt-08.firebaseio.com/';
+  var url = 'https://angular-t3.firebaseio.com/';
   var t3Ref = new Firebase(url);
   var boardRef = new Firebase(url + 'board');
-  var playerRef = new Firebase(url + 'player');
+  var playerActiveRef = new Firebase(url + 'player-active');
   var playerInitRef = new Firebase(url + 'player-init');
   var levelRef = new Firebase(url + 'level');
   var statusRef = new Firebase(url + 'status');
 
   // Firebase Remote References
   $scope.remoteBoard = $firebase(new Firebase(url + 'board'));
-  $scope.remoteBoardActive = $firebase(new Firebase(url + 'boardActive'));
-  $scope.remoteBoardScore = $firebase(new Firebase(url + 'boardScore'));
-  $scope.remoteGameInit = $firebase(new Firebase(url + 'gameInit'));
+  $scope.remoteBoardActive = $firebase(new Firebase(url + 'board-active'));
+  $scope.remoteBoardScore = $firebase(new Firebase(url + 'board-score'));
+  $scope.remoteGameInit = $firebase(new Firebase(url + 'game-init'));
   $scope.remoteLevel = $firebase(new Firebase(url + 'level'));
-  $scope.remotePlayer = $firebase(new Firebase(url + 'player'));
+  $scope.remotePlayerActive = $firebase(new Firebase(url + 'player-active'));
   $scope.remotePlayerInit = $firebase(new Firebase(url + 'player-init'));
   $scope.remoteStatus = $firebase(new Firebase(url + 'status'));
-  $scope.remoteWinScore = $firebase(new Firebase(url + 'winScore'));
+  $scope.remoteLevelScore = $firebase(new Firebase(url + 'level-score'));
  
   // Firebase Bindings
   $scope.remoteBoard.$bind($scope, 'board');
@@ -313,19 +313,22 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   $scope.remoteBoardScore.$bind($scope, 'boardScore');
   $scope.remoteGameInit.$bind($scope, 'gameInit');
   $scope.remoteLevel.$bind($scope, 'level');
-  $scope.remotePlayer.$bind($scope, 'playerActive');
+  $scope.remotePlayerActive.$bind($scope, 'playerActive');
   $scope.remotePlayerInit.$bind($scope, 'playerInit');
   $scope.remoteStatus.$bind($scope, 'boardStatus');
-  $scope.remoteWinScore.$bind($scope, 'winScore');
+  $scope.remoteLevelScore.$bind($scope, 'levelScore');
+
+  // Notes:
+  // - Fix Tile Selection (playerId) on Disconnect
+  // - Build Lobby for Multiple Players
+  // - Create New Game Instances
 
   // On Disconnect
   boardRef.onDisconnect().remove();
-  playerRef.onDisconnect().set(0);
+  playerActiveRef.onDisconnect().set(0);
   playerInitRef.onDisconnect().set(0);
   levelRef.onDisconnect().set(3);
   statusRef.onDisconnect().set('Select Difficulty to Start');
-
-  // Notes: Reset Player Tile on Disconnect and Update URL Refs
 
 
 }]);
