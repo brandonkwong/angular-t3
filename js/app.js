@@ -2,16 +2,9 @@ var t3App = angular.module('T3App', ['firebase']);
 
 t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $firebase) {
 
-  // Difficulty Level
-  $scope.lvlNorm = 3;
-  $scope.lvlHard = 4;
-  $scope.lvlExp = 5;
-
-  
-  // REQUIRES MORE TESTING
-
   // Players
   $scope.playerInit = false;
+  $scope.playerId = false;
 
   // Player Set Function
   $scope.playerSet = function() {
@@ -27,6 +20,12 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
     console.log($scope.playerId);
 
   };
+
+
+  // Difficulty Level
+  $scope.lvlNorm = 3;
+  $scope.lvlHard = 4;
+  $scope.lvlExp = 5;
 
 
   // Board New Function
@@ -255,8 +254,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
       switch ($scope.playerActive) {
         // Player 1 Actions on Click
         case 1:
-
-          if ($scope.playerId === 1) {  // Requires more testing
+          if ($scope.playerId === 1) {
             $scope.boardScore.tileCount++;
             tile.active = true;
             tile.playerOne = true;
@@ -266,15 +264,10 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
               $scope.boardStatus = 'Player Move';
             }
           }
-          else {
-            alert('it is not your turn');
-          }
-
           break;
         // Player 2 Actions on Click
         case 2:
-
-          if ($scope.playerId === 2) {  // Requires more testing
+          if ($scope.playerId === 2) {
             $scope.boardScore.tileCount++;
             tile.active = true;
             tile.playerTwo = true;
@@ -284,10 +277,6 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
               $scope.boardStatus = 'Player Move';
             }
           }
-          else {
-            alert('it is not your turn');
-          }
-
           break;
       }
     }
@@ -303,11 +292,8 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   var t3Ref = new Firebase(url);
   var boardRef = new Firebase(url + 'board');
   var playerRef = new Firebase(url + 'player');
-
   var playerInitRef = new Firebase(url + 'player-init');
-
-  var playerOneRef = new Firebase(url + 'player-one');
-  var playerTwoRef = new Firebase(url + 'player-two');
+  var levelRef = new Firebase(url + 'level');
   var statusRef = new Firebase(url + 'status');
 
   // Firebase Remote References
@@ -337,8 +323,9 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   // On Disconnect
   boardRef.onDisconnect().remove();
   playerRef.onDisconnect().set(0);
-  statusRef.onDisconnect().set('Select Difficulty to Start');
   playerInitRef.onDisconnect().set(false);
+  levelRef.onDisconnect().set(3);
+  statusRef.onDisconnect().set('Select Difficulty to Start');
 
 
 }]);
