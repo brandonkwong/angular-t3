@@ -6,7 +6,6 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   $scope.playerId;
   $scope.playerInit = 0;
 
-
   // Player Set Function
   $scope.playerSet = function(player) {
     switch (player) {
@@ -20,7 +19,6 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
         break;
     }
   };
-
 
   // Difficulty Level
   $scope.lvlNorm = 3;
@@ -57,17 +55,18 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
     // Tile Objects
     for (var i = 0; i < grid; i++) {
-      // Clear Tile
+      // Left Wall Tiles (Clear Tiles)
       if (i % lvl === 0) {
         $scope.board.push({
           index: i,
           active: false,
-          wallL: true, // Clears floats to break into rows
+          wallL: true, // Clear floats to break into rows
           wallR: false,
           playerOne: false,
           playerTwo: false
         });
       }
+      // Right Wall Tiles
       else if (i % lvl === lvl - 1) {
         $scope.board.push({
           index: i,
@@ -78,7 +77,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
           playerTwo: false
         });
       }
-      // Default Tile
+      // Default Tiles
       else {
         $scope.board.push({
           index: i,
@@ -92,7 +91,6 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
     }
 
   };
-
 
   // Board Init
   $scope.boardInit = function() {
@@ -112,7 +110,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
     var index = tile.index;
     var grid = $scope.level * $scope.level;
 
-    // Player Arrays
+    // Player Temp Arrays
     $scope.playerRow = [];
     $scope.playerCol = [];
     $scope.playerDiL = [];
@@ -120,6 +118,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
     // Row Scan
     for (var i = 1; i < grid; i++) {
+      // Adjacent Right Tiles
       if (b[index + i] && b[index + i][player]) {
         if (b[index + i].wallL) {
           break;
@@ -133,6 +132,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
       }
     }
     for (var i = 1; i < grid; i++) {
+      // Adjacent Left Tiles
       if (b[index - i] && b[index - i][player]) {
         if (b[index - i].wallR) {
           break;
@@ -148,6 +148,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
     // Column Scan
     for (var i = $scope.level; i < grid; i += $scope.level) {
+      // Adjacent Top Tiles
       if (b[index + i] && b[index + i][player]) {
         $scope.playerCol.push(0);
       }
@@ -156,6 +157,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
       }
     }
     for (var i = $scope.level; i < grid; i += $scope.level) {
+      // Adjacent Bottom Tiles
       if (b[index - i] && b[index - i][player]) {
         $scope.playerCol.push(0);
       }
@@ -166,6 +168,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
     // Diagonal Left Scan
     for (var i = ($scope.level + 1); i < grid; i += ($scope.level + 1)) {
+      // Adjacent Bottom Right Tiles
       if (b[index + i] && b[index + i][player]) {
         if (b[index + i].wallL) {
           break;
@@ -179,6 +182,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
       }
     }
     for (var i = ($scope.level + 1); i < grid; i += ($scope.level + 1)) {
+      // Adjacent Top Left Tiles
       if (b[index - i] && b[index - i][player]) {
         if (b[index - i].wallR) {
           break;
@@ -194,6 +198,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
 
     // Diagonal Right Scan
     for (var i = ($scope.level - 1); i < grid; i += ($scope.level - 1)) {
+      // Adjacent Bottom Left Tiles
       if (b[index + i] && b[index + i][player]) {
         if (b[index + i].wallR) {
           break;
@@ -207,6 +212,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
       }
     }
     for (var i = ($scope.level - 1); i < grid; i += ($scope.level - 1)) {
+      // Adjacent Top Right Tiles
       if (b[index - i] && b[index - i][player]) {
         if (b[index - i].wallL) {
           break;
@@ -245,7 +251,6 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
     }
 
   };
-
 
   // Tile Click Function
   $scope.tileClick = function(tile, player) {
@@ -319,6 +324,7 @@ t3App.controller('T3Controller', ['$scope', '$firebase', function($scope, $fireb
   $scope.remoteLevelScore.$bind($scope, 'levelScore');
 
   // Notes:
+  // - Fix Bug for Disappearing Board
   // - Fix Tile Selection (playerId) on Disconnect
   // - Build Lobby for Multiple Players
   // - Create New Game Instances
