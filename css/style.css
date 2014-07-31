@@ -25,6 +25,32 @@ h2 span {
   cursor: pointer;
 }
 
+h3 {
+  margin: 0;
+}
+
+p {
+  line-height: 1.35em;
+  margin: .75em 0 1.5em;
+}
+
+a {
+    border-bottom: 1px dotted #bbb;
+    color: #197ca8;
+    padding-bottom: .12em;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 1px dotted #197ca8;
+}
+
+a:active {
+    background: #197ca8;
+    border-bottom: 1px dotted #fff;
+    color: #fff;
+}
+
 
 /* =Container
 -------------------------------------------------- */
@@ -38,6 +64,11 @@ h2 span {
 
 .clear {
   clear: both;
+}
+
+.description {
+  margin: 3em auto;
+  max-width: 36em;
 }
 
 
@@ -231,5 +262,9 @@ h2 span {
 
   .button {
     font-size: .95em;
+  }
+
+  .description {
+    max-width: 20em;
   }
 }
